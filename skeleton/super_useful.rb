@@ -44,9 +44,30 @@ end
 # PHASE 4
 class BestFriend
   def initialize(name, yrs_known, fav_pastime)
-    @name = name
-    @yrs_known = yrs_known
-    @fav_pastime = fav_pastime
+    begin
+      @name = name
+      raise ArgumentError.new("You didn't tell me your name!") if name.empty?
+    rescue ArgumentError => e
+      puts e.message
+      return
+    end
+
+    begin
+      @yrs_known = yrs_known
+      raise ArgumentError.new("You are NOT my best friend!!!") if yrs_known < 5
+    rescue ArgumentError => e
+      puts e.message
+      return
+    end
+
+    begin
+      @fav_pastime = fav_pastime
+      raise ArgumentError.new("You didn't tell me your favorite pastime!") \
+        if fav_pastime.empty?
+    rescue ArgumentError => e
+      puts e.message
+      return
+    end
   end
 
   def talk_about_friendship
