@@ -14,16 +14,31 @@ def reaction(maybe_fruit)
   if FRUITS.include? maybe_fruit
     puts "OMG, thanks so much for the #{maybe_fruit}!"
   else
-    raise StandardError
+    raise StandardError.new("that's not a fruit")
+
   end
 end
 
 def feed_me_a_fruit
   puts "Hello, I am a friendly monster. :)"
 
-  puts "Feed me a fruit! (Enter the name of a fruit:)"
-  maybe_fruit = gets.chomp
-  reaction(maybe_fruit)
+  begin
+    puts "Feed me a fruit! (Enter the name of a fruit:)"
+    maybe_fruit = gets.chomp
+
+    raise CoffeeError.new("Thanks for the coffee") if maybe_fruit == 'coffee'
+
+    reaction(maybe_fruit)
+  rescue CoffeeError => e
+    puts e.message
+    retry
+  rescue StandardError => e
+    puts e.message
+  end
+
+end
+
+class CoffeeError < StandardError
 end
 
 # PHASE 4
