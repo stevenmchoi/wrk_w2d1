@@ -7,8 +7,12 @@ class Employee
     @title = title
     @salary = salary
     @boss = boss
+
     boss.add_employee(self) if boss
   end
 
+  def bonus(multiplier)
+    salary * multiplier
+  end
 
 end
