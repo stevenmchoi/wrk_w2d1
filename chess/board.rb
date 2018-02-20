@@ -64,6 +64,10 @@ class Board
 
     board
   end
+
+  def valid_pos?(pos)
+    pos.all? { |num| num.between?(0, 7) }
+  end
 end
 
 class NoPieceError < ArgumentError
