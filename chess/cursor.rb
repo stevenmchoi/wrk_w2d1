@@ -37,12 +37,15 @@ class Cursor
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @selected = false
   end
 
   def get_input
     key = KEYMAP[read_char]
     handle_key(key)
   end
+
+
 
   private
 
@@ -78,6 +81,7 @@ class Cursor
   def handle_key(key)
     case key
     when :return || :space
+      toggle_selected
       @cursor_pos
     when MOVES.include?(key)
       update_pos(MOVES[key])
@@ -87,6 +91,10 @@ class Cursor
     end
   end
 
+  def toggle_selected
+    @selected = !@selected
+  end
+  
   def update_pos(diff)
     new_pos = [@cursor_pos, diff].transpose.map { |arr| arr.reduce(:+) }
     self.cursor_pos = new_pos if valid_pos?(new_pos)
