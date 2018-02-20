@@ -34,6 +34,10 @@ class Board
     end
   end
 
+  def move_piece!(start_pos, end_pos)
+    
+  end
+
   def self.new_game
     board = Board.new
 
