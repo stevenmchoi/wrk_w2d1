@@ -79,14 +79,13 @@ class Cursor
   end
 
   def handle_key(key)
-    case key
-    when :return || :space
+    if [:return, :space].include?(key)
       toggle_selected
       @cursor_pos
-    when MOVES.include?(key)
+    elsif MOVES.include?(key)
       update_pos(MOVES[key])
       nil
-    when :ctrl_c
+    elsif key == :ctrl_c
       Process.exit(0)
     end
   end
@@ -97,6 +96,6 @@ class Cursor
 
   def update_pos(diff)
     new_pos = [@cursor_pos, diff].transpose.map { |arr| arr.reduce(:+) }
-    self.cursor_pos = new_pos if valid_pos?(new_pos)
+    @cursor_pos = new_pos if @board.valid_pos?(new_pos)
   end
 end

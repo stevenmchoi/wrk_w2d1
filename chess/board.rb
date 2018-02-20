@@ -1,11 +1,12 @@
+require 'byebug'
+
 require_relative 'piece'
-require_relative 'null_piece'
 
 class Board
   attr_reader :grid
 
   def initialize
-    @grid = Array.new(8) { Array.new(8) { NullPiece.new(:default) } }
+    @grid = Array.new(8) { Array.new(8) { NullPiece.new } }
   end
 
   def [](pos)

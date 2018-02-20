@@ -33,12 +33,18 @@ end
 
 class King < Piece
   def initialize(color)
-    super(color, :K)
+    super(color, "\u2654")
   end
 end
 
 class Pawn < Piece
   def initialize(color)
     super(color, :p)
+  end
+end
+
+class NullPiece < Piece
+  def initialize
+    super(:default, " ")
   end
 end
