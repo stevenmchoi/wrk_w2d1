@@ -32,7 +32,7 @@ MOVES = {
 
 class Cursor
 
-  attr_reader :cursor_pos, :board
+  attr_reader :cursor_pos, :board, :selected
 
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
@@ -94,7 +94,7 @@ class Cursor
   def toggle_selected
     @selected = !@selected
   end
-  
+
   def update_pos(diff)
     new_pos = [@cursor_pos, diff].transpose.map { |arr| arr.reduce(:+) }
     self.cursor_pos = new_pos if valid_pos?(new_pos)

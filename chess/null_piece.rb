@@ -1,5 +1,5 @@
 class NullPiece < Piece
-  def initialize(color)
-    super(color, nil)
+  def initialize
+    super(:default, " ")
   end
 end
