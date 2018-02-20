@@ -25,22 +25,17 @@ class Display
         if (row_idx + col_idx).odd?
           bkgd = :light_black
         else
-          bkgd = :light_white
+          bkgd = :default
         end
 
         if [row_idx, col_idx] == @cursor.cursor_pos
           if @cursor.selected
-            print " #{piece.symbol} ".colorize(
-              mode: :bold, color: piece.color,
-              background: :red)
+            print "#{piece.symbol} ".colorize(mode: :bold, background: :red)
           else
-            print " #{piece.symbol} ".colorize(
-              color: piece.color,
-              background: :light_cyan)
+            print "#{piece.symbol} ".colorize(mode: :bold, background: :light_cyan)
           end
         else
-          print " #{piece.symbol} ".colorize(color: piece.color,
-                                             background: bkgd)
+          print "#{piece.symbol} ".colorize(mode: :bold, background: bkgd)
         end
       end
       puts ""

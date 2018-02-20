@@ -9,37 +9,61 @@ end
 
 class Rook < Piece
   def initialize(color)
-    super(color, :R)
+    if color == :white
+      super(color, "\u2656")
+    else
+      super(color, "\u265C")
+    end
   end
 end
 
 class Knight < Piece
   def initialize(color)
-    super(color, :N)
+    if color == :white
+      super(color, "\u2658")
+    else
+      super(color, "\u265E")
+    end
   end
 end
 
 class Bishop < Piece
   def initialize(color)
-    super(color, :B)
+    if color == :white
+      super(color, "\u2657")
+    else
+      super(color, "\u265D")
+    end
   end
 end
 
 class Queen < Piece
   def initialize(color)
-    super(color, :Q)
+    if color == :white
+      super(color, "\u2655")
+    else
+      super(color, "\u265B")
+    end
   end
 end
 
 class King < Piece
   def initialize(color)
-    super(color, "\u2654")
+    if color == :white
+      super(color, "\u2654")
+    else
+      super(color, "\u265A")
+    end
   end
 end
 
 class Pawn < Piece
   def initialize(color)
-    super(color, :p)
+    if color == :white
+      super(color, "\u2659")
+    else
+      super(color, "\u265F")
+    end
   end
 end
 
