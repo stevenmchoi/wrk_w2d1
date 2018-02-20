@@ -1,4 +1,14 @@
 module SlidingPiece
+  def moves(pos)
+    if self.is_a?(Rook)
+      horizontal(pos) + vertical(pos)
+    elsif self.is_a?(Bishop)
+      diagonal(pos)
+    else
+      horizontal(pos) + vertical(pos) + diagonal(pos)
+    end
+  end
+
   private
   def horizontal(pos)
     possible = []
