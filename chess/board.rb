@@ -5,27 +5,7 @@ class Board
   attr_reader :grid
 
   def initialize
-    @grid = Array.new(8) { Array.new(8) {NullPiece.new}}
-    
-    self[[0,0]] = self[[0,7]] = Rook.new(:white)
-    self[[7,0]] = self[[7,7]] = Rook.new(:black)
-
-    self[[0,1]] = self[[0,6]] = Knight.new(:white)
-    self[[7,1]] = self[[7,6]] = Knight.new(:black)
-
-    self[[0,2]] = self[[0,5]] = Bishop.new(:white)
-    self[[7,2]] = self[[7,5]] = Bishop.new(:black)
-
-    self[[0,3]] = Queen.new(:white)
-    self[[7,3]] = Queen.new(:black)
-
-    self[[0,4]] = King.new(:white)
-    self[[7,4]] = King.new(:black)
-
-    8.times do |idx|
-      self[[1,idx]] = Pawn.new(:white)
-      self[[6,idx]] = Pawn.new(:black)
-    end
+    @grid = Array.new(8) { Array.new(8) { NullPiece.new } }
   end
 
   def [](pos)
@@ -51,6 +31,38 @@ class Board
     rescue BlockedError => e
       puts e.message
     end
+  end
+
+  def self.new_game
+    board = Board.new
+
+    board[[0,0]] = Rook.new(:white)
+    board[[0,7]] = Rook.new(:white)
+    board[[7,0]] = Rook.new(:black)
+    board[[7,7]] = Rook.new(:black)
+
+    board[[0,1]] = Knight.new(:white)
+    board[[0,6]] = Knight.new(:white)
+    board[[7,1]] = Knight.new(:black)
+    board[[7,6]] = Knight.new(:black)
+
+    board[[0,2]] = Bishop.new(:white)
+    board[[0,5]] = Bishop.new(:white)
+    board[[7,2]] = Bishop.new(:black)
+    board[[7,5]] = Bishop.new(:black)
+
+    board[[0,3]] = Queen.new(:white)
+    board[[7,3]] = Queen.new(:black)
+
+    board[[0,4]] = King.new(:white)
+    board[[7,4]] = King.new(:black)
+
+    8.times do |idx|
+      board[[1,idx]] = Pawn.new(:white)
+      board[[6,idx]] = Pawn.new(:black)
+    end
+
+    board
   end
 end
 
