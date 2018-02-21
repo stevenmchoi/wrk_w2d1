@@ -1,3 +1,4 @@
+require 'singleton'
 require_relative 'modules'
 
 class Piece
@@ -88,6 +89,8 @@ class Pawn < Piece
 end
 
 class NullPiece < Piece
+  include Singleton
+
   def initialize
     super(:default, " ")
   end

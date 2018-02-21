@@ -6,7 +6,7 @@ class Board
   attr_reader :grid
 
   def initialize
-    @grid = Array.new(8) { Array.new(8) { NullPiece.new } }
+    @grid = Array.new(8) { Array.new(8) { NullPiece.instance } }
   end
 
   def [](pos)
@@ -25,7 +25,7 @@ class Board
       raise NoPieceError.new if piece.is_a?(NullPiece)
       raise BlockedError.new unless self[end_pos].is_a?(NullPiece)
 
-      self[start_pos] = NullPiece.new
+      self[start_pos] = NullPiece.instance
       add_piece(piece, end_pos)
     rescue NoPieceError => e
       puts e.message
