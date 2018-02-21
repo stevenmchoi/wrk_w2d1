@@ -12,74 +12,59 @@ module SlidingPiece
   private
   def horizontal(pos)
     possible = []
+    #right
+    possible += loop_pos(pos,[0,1])
 
-    8.times do |idx|
-      possible << [pos.first, idx]
-    end
+    #left
+    possible += loop_pos(pos,[0,-1])
 
-    possible - [pos]
+    possible
   end
 
   def vertical(pos)
     possible = []
+    #up
+    possible += loop_pos(pos,[1,0])
 
-    8.times do |idx|
-      possible << [idx, pos.last]
+    #down
+    possible += loop_pos(pos,[-1,0])
+
+    possible
+  end
+
+
+  def diagonal(pos)
+    possible = []
+    #up-right
+    possible += loop_pos(pos, [1,1])
+
+    #down-left
+    possible += loop_pos(pos,[-1,-1])
+
+    #down-right
+    possible += loop_pos(pos,[-1,1])
+
+    #up-left
+    possible += loop_pos(pos,[1,-1])
+
+    possible
+  end
+
+  def loop_pos(pos, key)
+    possible = []
+    loop do
+      pos = [pos, key].transpose.map { |arr| arr.reduce(:+) }
+      break unless @board.valid_pos?(pos)
+      if @board[pos].is_a?(Piece)
+        other_piece = @board[pos]
+        possible << pos unless other_piece.color == self.color
+        break
+      else
+        possible << pos
+      end
     end
 
     possible - [pos]
-  end
-
-  def diagonal(orig_pos)
-    possible = []
-
-    pos = orig_pos.dup
-    #up-right
-    loop do
-      pos.map! { |el| el + 1 }
-      if @board.valid_pos?(pos)
-        possible << pos
-      else
-        break
-      end
-    end
-
-    pos = orig_pos.dup
-    #down-left
-    loop do
-      pos.map! { |el| el - 1 }
-      if @board.valid_pos?(pos)
-        possible << pos
-      else
-        break
-      end
-    end
-
-    pos = orig_pos.dup
-    #down-right
-    loop do
-      row, col = pos
-      pos = [row - 1, col + 1 ]
-      if @board.valid_pos?(pos)
-        possible << pos
-      else
-        break
-      end
-    end
-
-    pos = orig_pos.dup
-    #up-left
-    loop do
-      row, col = pos
-      pos = [row + 1, col - 1 ]
-      if @board.valid_pos?(pos)
-        possible << pos
-      else
-        break
-      end
-    end
-
-    possible
   end
 end
 

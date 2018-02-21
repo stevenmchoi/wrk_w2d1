@@ -1,13 +1,25 @@
+require_relative 'modules'
+
 class Piece
   attr_reader :color, :symbol
 
   def initialize(color = nil, symbol = nil)
     @color = color
     @symbol = symbol
+    @current_pos = []
+    @board = nil
   end
+
+  def update_pos(pos, board)
+    @current_pos = pos
+    @board = board
+  end
+
 end
 
 class Rook < Piece
+  include SlidingPiece
+
   def initialize(color)
     if color == :white
       super(color, "\u2656")
@@ -18,6 +30,8 @@ class Rook < Piece
 end
 
 class Knight < Piece
+  include SteppingPiece
+
   def initialize(color)
     if color == :white
       super(color, "\u2658")
@@ -28,6 +42,8 @@ class Knight < Piece
 end
 
 class Bishop < Piece
+  include SlidingPiece
+
   def initialize(color)
     if color == :white
       super(color, "\u2657")
@@ -38,6 +54,8 @@ class Bishop < Piece
 end
 
 class Queen < Piece
+  include SlidingPiece
+
   def initialize(color)
     if color == :white
       super(color, "\u2655")
@@ -48,6 +66,8 @@ class Queen < Piece
 end
 
 class King < Piece
+  include SteppingPiece
+
   def initialize(color)
     if color == :white
       super(color, "\u2654")

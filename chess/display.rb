@@ -21,6 +21,7 @@ class Display
     system("clear")
 
     board.grid.reverse.each_with_index do | row, row_idx |
+      puts ""
       row.each_with_index do | piece, col_idx |
         if (row_idx + col_idx).odd?
           bkgd = :light_black
@@ -38,7 +39,6 @@ class Display
           print "#{piece.symbol} ".colorize(mode: :bold, background: bkgd)
         end
       end
-      puts ""
     end
 
 

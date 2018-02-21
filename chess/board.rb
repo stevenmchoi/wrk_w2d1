@@ -26,7 +26,7 @@ class Board
       raise BlockedError.new unless self[end_pos].is_a?(NullPiece)
 
       self[start_pos] = NullPiece.new
-      self[end_pos] = piece
+      add_piece(piece, end_pos)
     rescue NoPieceError => e
       puts e.message
     rescue BlockedError => e
@@ -35,7 +35,12 @@ class Board
   end
 
   def move_piece!(start_pos, end_pos)
-    
+
+  end
+
+  def add_piece(piece, pos)
+    self[pos] = piece
+    piece.update_pos(pos, self)
   end
 
   def self.new_game
