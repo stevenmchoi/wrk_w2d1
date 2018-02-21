@@ -55,12 +55,12 @@ module SlidingPiece
     loop do
       pos = [pos, key].transpose.map { |arr| arr.reduce(:+) }
       break unless @board.valid_pos?(pos)
-      if @board[pos].is_a?(Piece)
+      if @board[pos].is_a?(NullPiece)
+        possible << pos
+      else
         other_piece = @board[pos]
         possible << pos unless other_piece.color == self.color
         break
-      else
-        possible << pos
       end
     end
 
@@ -98,7 +98,11 @@ module SteppingPiece
       end
     end
 
-    possible - [pos]
-  end
+    possible -= [pos]
 
+    possible.reject do | pos |
+      other_piece = @board[pos]
+      other_piece.color == self.color
+    end
+  end
 end
