@@ -1,5 +1,5 @@
 module SlidingPiece
-  def moves(pos)
+  def moves(pos = @current_pos)
     if self.is_a?(Rook)
       horizontal(pos) + vertical(pos)
     elsif self.is_a?(Bishop)
@@ -70,7 +70,7 @@ end
 
 
 module SteppingPiece
-  def moves(pos)
+  def moves(pos = @current_pos)
     possible = []
 
     if self.is_a?(King)

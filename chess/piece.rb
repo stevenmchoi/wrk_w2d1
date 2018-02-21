@@ -1,5 +1,6 @@
 require 'singleton'
 require_relative 'modules'
+require_relative 'board'
 
 class Piece
   attr_reader :color, :symbol
